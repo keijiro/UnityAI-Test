@@ -34,17 +34,16 @@
       "dependencies": {}
     },
     "com.unity.ai.assistant": {
-      "version": "1.5.0-pre.2",
+      "version": "file:com.unity.ai.assistant",
       "depth": 0,
-      "source": "registry",
+      "source": "embedded",
       "dependencies": {
-        "com.unity.ai.generators": "1.5.0-pre.2",
-        "com.unity.serialization": "3.1.1",
-        "com.unity.modules.uielements": "1.0.0",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.unity.modules.unitywebrequest": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.serialization": "3.1.1",
+        "com.unity.ai.generators": "1.5.0-pre.2"
+      }
     },
     "com.unity.ai.generators": {
       "version": "1.5.0-pre.2",
