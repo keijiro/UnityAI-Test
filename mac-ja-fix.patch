@@ -1,0 +1,42 @@
+diff -ruN a/Library/PackageCache/com.unity.ai.assistant@e6a38fa97d39/Editor/UI/Scripts/Components/AssistantTextField.cs b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs
+--- a/Library/PackageCache/com.unity.ai.assistant@e6a38fa97d39/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-01-16 03:12:40
++++ b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-01-27 10:53:15
+@@ -56,6 +56,7 @@
+         bool m_HighlightFocus;
+         bool m_EditContextEnabled;
+         bool m_ImageSizeExceeded;
++        string m_PreviousComposition;
+ 
+         public AssistantTextField()
+             : base(AssistantUIConstants.UIModulePath)
+@@ -229,6 +230,7 @@
+ 
+         void OnTextFieldValueChanged(ChangeEvent<string> evt)
+         {
++            m_PreviousComposition = Input.compositionString;
+             OnChatValueChanged();
+         }
+ 
+@@ -378,6 +380,8 @@
+                 case KeyCode.Return:
+                 case KeyCode.KeypadEnter:
+                     if (Text.Trim().Length == 0)
++                        return;
++                    if (!string.IsNullOrEmpty(Input.compositionString) || !string.IsNullOrEmpty(m_PreviousComposition))
+                         return;
+                     break;
+ 
+diff -ruN a/Library/PackageCache/com.unity.ai.assistant@e6a38fa97d39/Editor/UI/Styles/AssistantSharedDark.uss b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss
+--- a/Library/PackageCache/com.unity.ai.assistant@e6a38fa97d39/Editor/UI/Styles/AssistantSharedDark.uss	2026-01-16 03:12:40
++++ b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss	2026-01-27 14:23:35
+@@ -46,6 +46,10 @@
+     --muse-chat-popup-tab-hover: #cbcbcb;
+ }
+ 
++.unity-text-element {
++    -unity-font-definition: url("project://database/Packages/jp.keijiro.ai.assistant.extensions/Editor/NotoSansJP-Regular.ttf?fileID=12800000&guid=f7d2dd1a328194df9b71491ff2d07e2b&type=3#NotoSansJP-Regular");
++}
++
+ .-muse-chat-panel {
+     background-color: var(--muse-chat-backgrounds-150);
+ }
