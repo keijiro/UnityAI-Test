@@ -2,7 +2,7 @@ This repository contains a testbed project for the Unity AI 2026 Beta.
 
 ## About macOS IME patch
 
-The Unity AI Assistant window (v1.5.0-pre2) has a few issues with handling the
+The Unity AI Assistant window (v1.7.0-pre.1) has a few issues with handling the
 Japanese language:
 
 - Incorrectly detects the return key as being pressed while Japanese text is
