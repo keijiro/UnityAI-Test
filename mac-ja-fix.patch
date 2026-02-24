@@ -1,7 +1,7 @@
-diff -ruN a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/Scripts/Components/AssistantTextField.cs b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs
---- a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-02-10 06:23:21
-+++ b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-02-10 10:43:27
-@@ -75,6 +75,7 @@
+diff -ruN a/Library/PackageCache/com.unity.ai.assistant@5ecf2493a698/Editor/UI/Scripts/Components/AssistantTextField.cs b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs
+--- a/Library/PackageCache/com.unity.ai.assistant@5ecf2493a698/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-02-24 06:58:07
++++ b/Packages/com.unity.ai.assistant/Editor/UI/Scripts/Components/AssistantTextField.cs	2026-02-24 16:47:54
+@@ -76,6 +76,7 @@
          bool m_HighlightFocus;
          bool m_EditContextEnabled;
          bool m_ImageSizeExceeded;
@@ -9,7 +9,7 @@ diff -ruN a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/S
  
          public AssistantTextField()
              : base(AssistantUIConstants.UIModulePath)
-@@ -344,6 +345,7 @@
+@@ -345,6 +346,7 @@
  
          void OnTextFieldValueChanged(ChangeEvent<string> evt)
          {
@@ -17,7 +17,7 @@ diff -ruN a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/S
              OnChatValueChanged();
          }
  
-@@ -657,6 +659,8 @@
+@@ -653,6 +655,8 @@
                  case KeyCode.Return:
                  case KeyCode.KeypadEnter:
                      if (Text.Trim().Length == 0)
@@ -26,9 +26,9 @@ diff -ruN a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/S
                          return;
                      break;
  
-diff -ruN a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/Styles/AssistantSharedDark.uss b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss
---- a/Library/PackageCache/com.unity.ai.assistant@138707014a09/Editor/UI/Styles/AssistantSharedDark.uss	2026-02-10 06:23:21
-+++ b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss	2026-02-10 10:43:27
+diff -ruN a/Library/PackageCache/com.unity.ai.assistant@5ecf2493a698/Editor/UI/Styles/AssistantSharedDark.uss b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss
+--- a/Library/PackageCache/com.unity.ai.assistant@5ecf2493a698/Editor/UI/Styles/AssistantSharedDark.uss	2026-02-24 06:58:07
++++ b/Packages/com.unity.ai.assistant/Editor/UI/Styles/AssistantSharedDark.uss	2026-02-24 16:48:31
 @@ -46,6 +46,10 @@
      --muse-chat-popup-tab-hover: #cbcbcb;
  }
