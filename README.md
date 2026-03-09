@@ -1,8 +1,8 @@
 This repository contains a testbed project for the Unity AI 2026 Beta.
 
-## About macOS IME patch
+## About macOS Japanese font issue
 
-The Unity AI Assistant window (v1.7.0-pre.1) has a few issues with handling the
+The Unity AI Assistant window (v2.0.0-pre.1) has a few issues with handling the
 Japanese language:
 
 - Incorrectly detects the return key as being pressed while Japanese text is
@@ -10,12 +10,13 @@ Japanese language:
 - The default font atlas overflows when the window contains many Japanese
   glyphs.
 
-The patch file `mac-ja-fix.patch` contains a hotfix for these issues. You can
-apply it with the following steps:
+The first issue can be worked around by enabling the "Use ⌘Return to send a
+prompt" option.
 
-1. Clone the Unity AI Assistant package by pressing the "Customize" button in
-   the Package Manager window.
-2. Apply the patch from the command line: `patch -p1 < mac-ja-fix.patch`
+The second issue can also be worked around by dynamically modifying the UI
+style with a custom Editor script. The custom package included in this project
+(`jp.keijiro.ai.assistant.extensions`) provides a script that applies a proper
+Japanese font to the Assistant window.
 
 I've already reported these issues to the development team. You can use this
-patch as a workaround until they are fixed.
+project as a workaround until they are fixed.
