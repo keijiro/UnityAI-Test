@@ -878,11 +878,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: b54fa284-19ad-4d5e-827e-ba180cf85e69
+  cloudProjectId: 48b95a15-2113-421e-9759-f3026ed2ee68
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: UnityAI-Test
-  organizationId: keijiro-utj
+  organizationId: keijiro
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
