@@ -209,6 +209,15 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "jp.keijiro.kino.post-processing.eight.universal": {
+      "version": "2.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "17.0.0"
+      },
+      "url": "https://registry.npmjs.com"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
