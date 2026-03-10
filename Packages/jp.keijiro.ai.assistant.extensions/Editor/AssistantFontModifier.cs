@@ -7,11 +7,13 @@ namespace AIAssistantExtensions {
 [InitializeOnLoad]
 static class AssistantFontModifier
 {
-    const string FontAssetPath =
-      "Packages/jp.keijiro.ai.assistant.extensions/Editor/NotoSansJP-Regular.ttf";
+    const string OverrideStylePath =
+      "Packages/jp.keijiro.ai.assistant.extensions/Editor/AssistantFontOverride.uss";
 
     const string TargetWindowTypeName =
       "Unity.AI.Assistant.UI.Editor.Scripts.AssistantWindow";
+
+    const string TargetRootElementName = "root-panel";
 
     //
     // Constructor and event handlers
@@ -41,7 +43,7 @@ static class AssistantFontModifier
     // Font application logic
     //
 
-    static Font _font;
+    static StyleSheet _styleSheet;
 
     static bool CheckWindowType(EditorWindow window)
       => window?.GetType()?.FullName == TargetWindowTypeName;
@@ -49,17 +51,14 @@ static class AssistantFontModifier
     static void ApplyCustomFont(EditorWindow window)
     {
         var root = window.rootVisualElement;
-        var elements = root.Query<TextElement>(className: "unity-text-element").ToList();
-        if (elements.Count == 0) return;
+        var target = root?.Q<VisualElement>(TargetRootElementName);
+        if (target == null) return;
 
-        if (_font == null) _font = AssetDatabase.LoadAssetAtPath<Font>(FontAssetPath);
-        var unityFont = new StyleFont(_font);
+        if (_styleSheet == null)
+            _styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(OverrideStylePath);
 
-        foreach (var element in elements)
-        {
-            element.style.unityFontDefinition = StyleKeyword.None;
-            element.style.unityFont = unityFont;
-        }
+        if (!target.styleSheets.Contains(_styleSheet))
+            target.styleSheets.Add(_styleSheet);
     }
 
     static void CheckAndApplyCustomFont(EditorWindow window)
