@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,9 +6,14 @@ namespace AIAssistantExtensions {
 
 class AssistantImeProxyWindow : EditorWindow
 {
-    const int BorderRadius = 8;
+    const string UxmlPath =
+      "Packages/jp.keijiro.ai.assistant.extensions/Editor/AssistantImeProxy.uxml";
+
+    const string StyleSheetPath =
+      "Packages/jp.keijiro.ai.assistant.extensions/Editor/AssistantImeProxy.uss";
 
     VisualElement _placeholder;
+    VisualElement _inputRoot;
     VisualElement _textFieldContainer;
     TextField _textField;
 
@@ -20,32 +24,36 @@ class AssistantImeProxyWindow : EditorWindow
         window.titleContent = new GUIContent("IME Proxy");
     }
 
+    static VisualTreeAsset _uxml;
+    static StyleSheet _styleSheet;
+
     void CreateGUI()
     {
-        // Root fills the entire window
-        rootVisualElement.style.flexGrow = 1;
-        rootVisualElement.style.paddingTop = 4;
-        rootVisualElement.style.paddingBottom = 4;
-        rootVisualElement.style.paddingLeft = 4;
-        rootVisualElement.style.paddingRight = 4;
+        _uxml ??= AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
+        _styleSheet ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(StyleSheetPath);
 
-        // Placeholder box shown when no text field is active.
-        _placeholder = new VisualElement();
-        _placeholder.style.flexGrow = 1;
-        _placeholder.style.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 1f);
-        _placeholder.style.borderBottomLeftRadius = BorderRadius;
-        _placeholder.style.borderBottomRightRadius = BorderRadius;
-        _placeholder.style.borderTopLeftRadius = BorderRadius;
-        _placeholder.style.borderTopRightRadius = BorderRadius;
-        _placeholder.style.justifyContent = Justify.Center;
-        _placeholder.style.alignItems = Align.Center;
+        rootVisualElement.Clear();
+        if (_styleSheet != null && !rootVisualElement.styleSheets.Contains(_styleSheet))
+            rootVisualElement.styleSheets.Add(_styleSheet);
 
-        var label = new Label("Click here to type a prompt");
-        label.style.color = new Color(0.6f, 0.6f, 0.6f, 1f);
-        _placeholder.Add(label);
+        if (_uxml == null)
+        {
+            rootVisualElement.Add(new Label("Failed to load AssistantImeProxy.uxml"));
+            return;
+        }
+
+        _uxml?.CloneTree(rootVisualElement);
+
+        _placeholder = rootVisualElement.Q<VisualElement>("placeholder");
+        _inputRoot = rootVisualElement.Q<VisualElement>("input-root");
+        if (_placeholder == null || _inputRoot == null)
+        {
+            rootVisualElement.Clear();
+            rootVisualElement.Add(new Label("Assistant IME Proxy UI is invalid."));
+            return;
+        }
 
         _placeholder.RegisterCallback<ClickEvent>(_ => ActivateTextField());
-        rootVisualElement.Add(_placeholder);
     }
 
     void ActivateTextField()
@@ -55,42 +63,27 @@ class AssistantImeProxyWindow : EditorWindow
 
         // Container with rounded corners and relative positioning for the hint label
         _textFieldContainer = new VisualElement();
-        _textFieldContainer.style.flexGrow = 1;
-        _textFieldContainer.style.position = Position.Relative;
+        _textFieldContainer.AddToClassList("ime-input-container");
 
         // Create a fresh TextField each time — no stale cursor or IME state.
         _textField = new TextField { multiline = true };
-        _textField.style.flexGrow = 1;
-        _textField.style.borderBottomLeftRadius = BorderRadius;
-        _textField.style.borderBottomRightRadius = BorderRadius;
-        _textField.style.borderTopLeftRadius = BorderRadius;
-        _textField.style.borderTopRightRadius = BorderRadius;
-        _textField.style.overflow = Overflow.Hidden;
+        _textField.AddToClassList("ime-input-field");
 
         // Also round the inner TextInput element
         var textInput = _textField.Q("unity-text-input");
-        if (textInput != null)
-        {
-            textInput.style.borderBottomLeftRadius = BorderRadius;
-            textInput.style.borderBottomRightRadius = BorderRadius;
-            textInput.style.borderTopLeftRadius = BorderRadius;
-            textInput.style.borderTopRightRadius = BorderRadius;
-        }
+        if (textInput != null) textInput.AddToClassList("ime-input-field__input");
 
         _textField.RegisterCallback<KeyDownEvent>(OnKeyDown, TrickleDown.TrickleDown);
         _textFieldContainer.Add(_textField);
 
         // Hint label overlaid at the bottom-right corner
         var hint = new Label("\u2318+Enter to send");
-        hint.style.position = Position.Absolute;
-        hint.style.bottom = 6;
-        hint.style.right = 10;
-        hint.style.fontSize = 11;
-        hint.style.color = new Color(0.5f, 0.5f, 0.5f, 0.6f);
+        hint.AddToClassList("ime-input-hint");
         hint.pickingMode = PickingMode.Ignore;
         _textFieldContainer.Add(hint);
 
-        rootVisualElement.Add(_textFieldContainer);
+        _inputRoot.style.display = DisplayStyle.Flex;
+        _inputRoot.Add(_textFieldContainer);
 
         // Focus after the element is attached to the panel
         _textField.schedule.Execute(() => _textField.Focus());
@@ -107,6 +100,7 @@ class AssistantImeProxyWindow : EditorWindow
         }
 
         // Show placeholder again
+        _inputRoot.style.display = DisplayStyle.None;
         _placeholder.style.display = DisplayStyle.Flex;
     }
 
