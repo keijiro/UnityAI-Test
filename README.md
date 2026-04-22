@@ -27,5 +27,7 @@ You can open it from `Window > AI > IME Proxy`. It automatically copies the
 contents of its text field to the AI Assistant chat field and sends it to the
 server when you press `⌘ + Enter`.
 
+<img width="600" height="425" alt="IME Proxy" src="https://github.com/user-attachments/assets/a6b5146d-1b63-47dd-ab4d-633357996974" />
+
 I've already reported these issues to the development team. You can use this
 extension as a workaround until they are fixed.
