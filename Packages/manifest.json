@@ -1,17 +1,4 @@
 {
-  "dependencies": {
-    "com.unity.ai.assistant": "2.6.0-pre.1",
-    "com.unity.inputsystem": "1.19.0",
-    "com.unity.render-pipelines.universal": "17.3.0",
-    "jp.keijiro.ai.assistant.extensions": "1.1.0",
-    "jp.keijiro.kino.post-processing.eight.universal": "2.0.1",
-    "com.unity.modules.ai": "1.0.0",
-    "com.unity.modules.audio": "1.0.0",
-    "com.unity.modules.particlesystem": "1.0.0",
-    "com.unity.modules.physics2d": "1.0.0",
-    "com.unity.modules.tilemap": "1.0.0",
-    "com.unity.modules.uielements": "1.0.0"
-  },
   "scopedRegistries": [
     {
       "name": "Keijiro",
@@ -20,5 +7,17 @@
         "jp.keijiro"
       ]
     }
-  ]
+  ],
+  "dependencies": {
+    "com.unity.ai.assistant": "2.7.0-pre.1",
+    "com.unity.inputsystem": "1.19.0",
+    "com.unity.render-pipelines.universal": "17.3.0",
+    "jp.keijiro.ai.assistant.extensions": "1.1.0",
+    "com.unity.modules.ai": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.physics2d": "1.0.0",
+    "com.unity.modules.tilemap": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0"
+  }
 }
