@@ -1,7 +1,19 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "Keijiro",
+      "url": "https://registry.npmjs.com",
+      "scopes": [
+        "jp.keijiro"
+      ]
+    }
+  ],
   "dependencies": {
+    "com.unity.ai.assistant": "2.7.0-pre.3",
+    "com.unity.ai.inference": "2.6.1",
     "com.unity.inputsystem": "1.19.0",
     "com.unity.render-pipelines.universal": "17.3.0",
+    "jp.keijiro.ai.assistant.extensions": "1.1.2",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.audio": "1.0.0",
     "com.unity.modules.particlesystem": "1.0.0",
